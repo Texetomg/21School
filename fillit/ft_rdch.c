@@ -13,7 +13,7 @@
 #include "fillit.h"
 
 
-char **check_block(int fd, char buff[21], char **result, int cnt_block)
+char **check_block(int fd, char buff[21], char ***result, int cnt_block)
 {
 	int		cnt_symb;
 	int		cnt_diese;
@@ -28,7 +28,7 @@ char **check_block(int fd, char buff[21], char **result, int cnt_block)
 		if (buff[cnt_symb] == '\n')
 		{
 			if (cnt_symb % 5 != 4)
-				return (free_result(&result, fd));
+				return (free_result(result, fd));
 			else
 				continue;
 		}
@@ -42,12 +42,12 @@ char **check_block(int fd, char buff[21], char **result, int cnt_block)
 		}
 		else if (buff[cnt_symb] == '.')
 			continue;
-		return (free_result(*result, fd));
+		return (free_result(result, fd));
 	}
 	if (buff[cnt_symb] != '\n' || cnt_diese != 4)
-		return (free_result(*result, fd));
-	if (get_result(*result, place) == 0)
-		return (free_result(*result, fd));
+		return (free_result(result, fd));
+	if (get_result(result, place) == 0)
+		return (free_result(result, fd));
 	cnt_block++;
 }
 
