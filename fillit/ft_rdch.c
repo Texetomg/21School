@@ -12,60 +12,79 @@
 
 #include "fillit.h"
 
-
-char **check_block(int fd, char buff[21], char ***result, int cnt_block)
+int		check_eof(char **file)
 {
-	int		cnt_symb;
-	int		cnt_diese;
-	int		place[4];
-	int		place_index;
+	int		fd;
+	char	buff[1000];
+	int		index;
 
-	cnt_symb = -1;
+	index = 0;
+	if ((fd = open(*file, O_RDONLY)) < 0)
+		return (0);
+	read(fd, buff, 1000);
+	while(buff[index])
+		index++;
+	if (buff[index - 1] == '\n' && buff[index - 2] == '\n')
+	{
+		close(fd);
+		return (0);
+	}
+	close(fd);
+	return (1);
+}
+
+int		check_block(char buff[21], char ***result)
+{
+	int cnt_s;
+	int cnt_diese;
+	int place_index;
+	int place[4];
+
+	cnt_s = -1;
 	cnt_diese = 0;
 	place_index = 0;
-	while (++cnt_symb < 20)
+	while (++cnt_s < 20)
 	{
-		if (buff[cnt_symb] == '\n')
+		if (buff[cnt_s] == '\n' && cnt_s % 5 != 4)
+			return (0);
+		else if (buff[cnt_s] == '\n')
+			continue;
+		else if (buff[cnt_s] == '#')
 		{
-			if (cnt_symb % 5 != 4)
-				return (free_result(result, fd));
-			else
-				continue;
-		}
-		else if (buff[cnt_symb] == '#')
-		{
-			cnt_diese++;
-			if (cnt_diese > 4)
+			if (++cnt_diese > 4)
 				return (0);
-			place[place_index++] = cnt_symb;
+			place[place_index++] = cnt_s;
 			continue;
 		}
-		else if (buff[cnt_symb] == '.')
+		else if (buff[cnt_s] == '.')
 			continue;
-		return (free_result(result, fd));
+		return (0);
 	}
-	if (buff[cnt_symb] != '\n' || cnt_diese != 4)
-		return (free_result(result, fd));
-	if (get_result(result, place) == 0)
-		return (free_result(result, fd));
-	cnt_block++;
+	if (buff[cnt_s] != '\n' || cnt_diese != 4 || get_result(result, place) == 0)
+		return (0);
+	return (1);
 }
 
 char	**ft_rdch(char *file)
 {
-	static int	cnt_block;
-	int			fd;
-	char		buff[21];
-	int			cnt_rd;
-	char		**result;
+	int		cnt_block;
+	int		fd;
+	char	buff[21];
+	int		cnt_rd;
+	char	**result;
 
 	result = (char**)malloc(sizeof(char*));
 	*result = 0;
-	if ((fd = open(file, O_RDONLY)) < 0)
+	if (!check_eof(&file) || (fd = open(file, O_RDONLY)) < 0)
 		return (0);
 	cnt_block = 0;
-	while ((cnt_rd = read(fd, buff, 21)) == 21)
-		check_block(fd, buff, &result, cnt_block);
+	while ((cnt_rd = read(fd, buff, 21)) >= 20)
+	{
+		if (check_block(buff, &result))
+			cnt_block++;
+		else
+			return (free_result(&result, fd));
+	}
 	if (cnt_block != 0 && cnt_rd == 0 && cnt_block < 27)
 	{
 		close(fd);
@@ -73,4 +92,3 @@ char	**ft_rdch(char *file)
 	}
 	return (free_result(&result, fd));
 }
-
