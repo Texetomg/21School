@@ -1,32 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfalmer- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/26 20:34:48 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/13 21:06:32 by thorker          ###   ########.fr       */
+/*   Created: 2018/11/28 22:47:06 by bfalmer-          #+#    #+#             */
+/*   Updated: 2018/11/28 22:47:07 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+void	ft_putendl_fd(char const *s, int fd)
 {
-	char	*result;
-
-	if (ac != 2)
-	{
-		write(1, "usage: ./fillit file_name\n", 26);
-		exit(0);
-	}
-	result = ft_rdch(av[1]);
-	if (!result)
-	{
-		write(1, "error\n", 6);
-		return (0);
-	}
-	brute_field(result);
-	return (0);
+	if (!s)
+		return ;
+	ft_putstr_fd(s, fd);
+	ft_putchar_fd('\n', fd);
 }

@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strequ.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfalmer- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/26 20:34:48 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/13 21:06:32 by thorker          ###   ########.fr       */
+/*   Created: 2018/11/27 17:23:52 by bfalmer-          #+#    #+#             */
+/*   Updated: 2018/11/27 17:23:54 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+int	ft_strequ(char const *s1, char const *s2)
 {
-	char	*result;
-
-	if (ac != 2)
-	{
-		write(1, "usage: ./fillit file_name\n", 26);
-		exit(0);
-	}
-	result = ft_rdch(av[1]);
-	if (!result)
-	{
-		write(1, "error\n", 6);
+	if (!s1 || !s2)
 		return (0);
-	}
-	brute_field(result);
+	if (ft_strcmp(s1, s2) == 0)
+		return (1);
 	return (0);
 }

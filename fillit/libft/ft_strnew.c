@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfalmer- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/26 20:34:48 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/13 21:06:32 by thorker          ###   ########.fr       */
+/*   Created: 2018/11/27 15:59:26 by bfalmer-          #+#    #+#             */
+/*   Updated: 2018/11/27 15:59:28 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+char	*ft_strnew(size_t size)
 {
-	char	*result;
+	char	*str;
+	size_t	index;
 
-	if (ac != 2)
+	index = 0;
+	str = malloc(sizeof(char) * (size + 1));
+	if (!str)
+		return (NULL);
+	while (index <= size)
 	{
-		write(1, "usage: ./fillit file_name\n", 26);
-		exit(0);
+		str[index] = 0;
+		index++;
 	}
-	result = ft_rdch(av[1]);
-	if (!result)
-	{
-		write(1, "error\n", 6);
-		return (0);
-	}
-	brute_field(result);
-	return (0);
+	return (str);
 }

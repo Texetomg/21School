@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_whitespace.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfalmer- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/26 20:34:48 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/13 21:06:32 by thorker          ###   ########.fr       */
+/*   Created: 2018/11/29 15:42:46 by bfalmer-          #+#    #+#             */
+/*   Updated: 2018/11/29 15:42:47 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+int	ft_whitespace(char str)
 {
-	char	*result;
-
-	if (ac != 2)
-	{
-		write(1, "usage: ./fillit file_name\n", 26);
-		exit(0);
-	}
-	result = ft_rdch(av[1]);
-	if (!result)
-	{
-		write(1, "error\n", 6);
-		return (0);
-	}
-	brute_field(result);
+	if (str == 0x20 || (str >= 0x09 && str <= 0x0d))
+		return (1);
 	return (0);
 }

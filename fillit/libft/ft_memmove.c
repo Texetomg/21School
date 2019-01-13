@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfalmer- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/26 20:34:48 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/13 21:06:32 by thorker          ###   ########.fr       */
+/*   Created: 2018/11/22 14:05:30 by bfalmer-          #+#    #+#             */
+/*   Updated: 2018/11/22 14:05:32 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+void	*ft_memmove(void *dest, const void *src, size_t len)
 {
-	char	*result;
+	int i;
 
-	if (ac != 2)
+	i = -1;
+	if (src < dest)
+		ft_memcpy(dest, src, len);
+	else
 	{
-		write(1, "usage: ./fillit file_name\n", 26);
-		exit(0);
+		while ((size_t)++i < len)
+			((char *)dest)[i] = ((char *)src)[i];
 	}
-	result = ft_rdch(av[1]);
-	if (!result)
-	{
-		write(1, "error\n", 6);
-		return (0);
-	}
-	brute_field(result);
-	return (0);
+	return (dest);
 }

@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfalmer- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/26 20:34:48 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/13 21:06:32 by thorker          ###   ########.fr       */
+/*   Created: 2018/11/26 18:51:55 by bfalmer-          #+#    #+#             */
+/*   Updated: 2018/11/26 18:51:57 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+char	*ft_strrchr(const char *s, int c)
 {
-	char	*result;
+	int index;
 
-	if (ac != 2)
+	index = 0;
+	while (s[index])
+		index++;
+	if (c == 0)
+		return ((char*)s + index);
+	index--;
+	while (index >= 0)
 	{
-		write(1, "usage: ./fillit file_name\n", 26);
-		exit(0);
+		if (s[index] == (char)c)
+			return ((char *)s + index);
+		index--;
 	}
-	result = ft_rdch(av[1]);
-	if (!result)
-	{
-		write(1, "error\n", 6);
-		return (0);
-	}
-	brute_field(result);
-	return (0);
+	return (NULL);
 }

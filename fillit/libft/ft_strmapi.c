@@ -1,32 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfalmer- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/26 20:34:48 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/13 21:06:32 by thorker          ###   ########.fr       */
+/*   Created: 2018/11/27 17:20:37 by bfalmer-          #+#    #+#             */
+/*   Updated: 2018/11/27 17:20:38 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	char	*result;
+	char	*str;
+	int		index;
 
-	if (ac != 2)
+	if (!s || !f)
+		return (NULL);
+	str = ft_strdup(s);
+	index = 0;
+	if (!str)
+		return (NULL);
+	while (s[index])
 	{
-		write(1, "usage: ./fillit file_name\n", 26);
-		exit(0);
+		str[index] = f(index, s[index]);
+		index++;
 	}
-	result = ft_rdch(av[1]);
-	if (!result)
-	{
-		write(1, "error\n", 6);
-		return (0);
-	}
-	brute_field(result);
-	return (0);
+	return (str);
 }

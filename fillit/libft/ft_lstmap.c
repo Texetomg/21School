@@ -1,32 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfalmer- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/26 20:34:48 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/13 21:06:32 by thorker          ###   ########.fr       */
+/*   Created: 2018/12/02 13:49:47 by bfalmer-          #+#    #+#             */
+/*   Updated: 2018/12/02 13:49:48 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+t_list	*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))
 {
-	char	*result;
+	t_list	*list_body;
+	t_list	*list_start;
 
-	if (ac != 2)
+	if (!lst)
+		return (NULL);
+	list_body = f(lst);
+	list_start = list_body;
+	while (lst->next)
 	{
-		write(1, "usage: ./fillit file_name\n", 26);
-		exit(0);
+		lst = lst->next;
+		if (!(list_body->next = f(lst)))
+		{
+			free(list_body->next);
+			return (NULL);
+		}
+		list_body = list_body->next;
 	}
-	result = ft_rdch(av[1]);
-	if (!result)
-	{
-		write(1, "error\n", 6);
-		return (0);
-	}
-	brute_field(result);
-	return (0);
+	return (list_start);
 }

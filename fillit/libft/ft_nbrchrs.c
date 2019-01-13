@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_nbrchrs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfalmer- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/26 20:34:48 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/13 21:06:32 by thorker          ###   ########.fr       */
+/*   Created: 2018/11/29 16:49:10 by bfalmer-          #+#    #+#             */
+/*   Updated: 2018/11/29 16:49:11 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+int	ft_nbrchrs(int n)
 {
-	char	*result;
+	int i;
 
-	if (ac != 2)
+	i = 0;
+	if (n > 0)
+		i = 1;
+	else
+		i = 2;
+	while (n && n >= 10)
 	{
-		write(1, "usage: ./fillit file_name\n", 26);
-		exit(0);
+		n = n / 10;
+		i++;
 	}
-	result = ft_rdch(av[1]);
-	if (!result)
-	{
-		write(1, "error\n", 6);
-		return (0);
-	}
-	brute_field(result);
-	return (0);
+	return (i);
 }

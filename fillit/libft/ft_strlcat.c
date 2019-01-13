@@ -1,32 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfalmer- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/26 20:34:48 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/13 21:06:32 by thorker          ###   ########.fr       */
+/*   Created: 2018/11/26 15:33:53 by bfalmer-          #+#    #+#             */
+/*   Updated: 2018/11/26 15:33:54 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+size_t	ft_strlcat(char *dst, const char *src, size_t size)
 {
-	char	*result;
+	size_t	index;
 
-	if (ac != 2)
+	index = 0;
+	while (dst[index])
+		index++;
+	while (*src && index + 1 < size)
 	{
-		write(1, "usage: ./fillit file_name\n", 26);
-		exit(0);
+		dst[index] = *src;
+		index++;
+		src++;
 	}
-	result = ft_rdch(av[1]);
-	if (!result)
-	{
-		write(1, "error\n", 6);
-		return (0);
-	}
-	brute_field(result);
-	return (0);
+	dst[index] = '\0';
+	if (index > size)
+		return (ft_strlen(src) + size);
+	else
+		return (ft_strlen(src) + ft_strlen(dst));
 }

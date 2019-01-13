@@ -1,32 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstdel.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfalmer- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/26 20:34:48 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/13 21:06:32 by thorker          ###   ########.fr       */
+/*   Created: 2018/11/30 17:46:03 by bfalmer-          #+#    #+#             */
+/*   Updated: 2018/11/30 17:46:05 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+void	ft_lstdel(t_list **alst, void (*del)(void *, size_t))
 {
-	char	*result;
+	t_list *current_list;
+	t_list *next_list;
 
-	if (ac != 2)
+	current_list = *alst;
+	while (current_list)
 	{
-		write(1, "usage: ./fillit file_name\n", 26);
-		exit(0);
+		next_list = current_list->next;
+		del(current_list->content, current_list->content_size);
+		free(current_list);
+		current_list = next_list;
 	}
-	result = ft_rdch(av[1]);
-	if (!result)
-	{
-		write(1, "error\n", 6);
-		return (0);
-	}
-	brute_field(result);
-	return (0);
+	*alst = NULL;
 }

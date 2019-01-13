@@ -1,32 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrev.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bfalmer- <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/12/26 20:34:48 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/13 21:06:32 by thorker          ###   ########.fr       */
+/*   Created: 2018/11/28 22:23:14 by bfalmer-          #+#    #+#             */
+/*   Updated: 2018/11/28 22:23:15 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "libft.h"
 
-int		main(int ac, char **av)
+char	*ft_strrev(char *str)
 {
-	char	*result;
+	char	*p1;
+	char	*p2;
+	char	temp;
 
-	if (ac != 2)
+	if (!str || !*str)
+		return (str);
+	p1 = str;
+	p2 = str + ft_strlen(str) - 1;
+	while (p2 > p1)
 	{
-		write(1, "usage: ./fillit file_name\n", 26);
-		exit(0);
+		temp = *p2;
+		*p2 = *p1;
+		*p1 = temp;
+		++p1;
+		--p2;
 	}
-	result = ft_rdch(av[1]);
-	if (!result)
-	{
-		write(1, "error\n", 6);
-		return (0);
-	}
-	brute_field(result);
-	return (0);
+	return (str);
 }
