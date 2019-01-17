@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 14:51:10 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/17 17:17:14 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/17 21:25:57 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,34 +47,22 @@ void bresenham_original(int x0, int y0, int x1, int y1, void *mlx_ptr, void *win
 
 int main(int ac, char **av)
 {
-	int		x0 = 0;
+	*int	x0 = 0;
 	int 	x1 = 500;
 	int		y0 = 0;
 	int		y1 = 500;
 	void    *mlx_ptr;
 	void	*win_ptr;
-	t_list 	*strrr;
-	int i;
 
 	if (ac != 2)
 	{
-		write(1, "usage: ./fillit file_name\n", 26);
+		write(1, "usage: ./fdf file_name\n", 26);
 		exit(0);
 	}
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, 500, 500, "mlx");
 	bresenham_original(x0, y0, x1, y1, mlx_ptr, win_ptr);
-	strrr = read_file(av[1]);
-	while (strrr)
-	{
-		i = 0;
-		while (strrr->content)
-		{
-			ft_putstr((char*)strrr->content[i]);
-			i++;
-		}
-		strrr = strrr->next;
-	}
 	mlx_key_hook(win_ptr, deal_key, 0);
 	mlx_loop(mlx_ptr);
+	read_file(av[1]);
 }
