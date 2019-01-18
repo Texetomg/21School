@@ -6,7 +6,7 @@
 #    By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/23 15:46:32 by bfalmer-          #+#    #+#              #
-#    Updated: 2019/01/16 14:22:38 by bfalmer-         ###   ########.fr        #
+#    Updated: 2019/01/18 16:59:34 by bfalmer-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ ft_strsplit.c ft_itoa.c ft_putchar.c ft_putstr.c ft_putendl.c ft_putnbr.c \
 ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_absolute.c \
 ft_strrev.c ft_whitespace.c ft_str_word_cnt.c ft_nbrchrs.c ft_lstnew.c \
 ft_lstdelone.c ft_lstdel.c ft_lstadd.c ft_lstiter.c ft_lstmap.c \
-get_next_line.c
+get_next_line.c ft_lstreverse.c
 INC=libft.h
 FLAGS=-c -Wall -Wextra -Werror
 $(NAME):
