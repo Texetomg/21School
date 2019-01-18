@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:14:31 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/17 21:16:53 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/18 15:26:04 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@ t_list    *read_file(char *file)
 {
     int     fd;
     t_list  *c_list;
-    t_list  *start_c_list;
     char    *line;
     char    **split_line;
    
     fd = open(file, O_RDONLY);
+    if (fd < 0)
+    {
+        write(1, "bad fd", 6);
+        return (0);
+    }
     c_list = ft_lstnew("0", 3 * sizeof(int));
-    start_c_list = c_list;
     zero_list(c_list);
     while (get_next_line(fd, &line))
     {
@@ -45,5 +48,6 @@ t_list    *read_file(char *file)
             split_line++;
         }
     }
-    return (start_c_list);
+    close(fd);
+    return (c_list);
 }
