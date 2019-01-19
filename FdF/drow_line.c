@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 21:29:47 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/18 16:58:49 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/19 17:11:32 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,32 +16,44 @@ void bresenham_original(t_list *list, void *mlx_ptr, void *win_ptr)
 {
     int deltax;
 	int error;
-	int y;
+	int coord[4];
 	int diry;
 
-	deltax = ft_absolute(x1 - x0);
+	coord[0] = ((int*)(list->content))[0];
+	coord[1] = ((int*)(list->content))[1];
+	coord[2] = ((int*)(list->next->content))[0];
+	coord[3] = ((int*)(list->next->content))[1];
+	deltax = ft_absolute(coord[2] - coord[0]);
 	error = 0;
-	y = y0;
-	diry = ((y1 - y0) > 0)? 1: -1;
-	while(x0 <= x1)
+	diry = ((coord[3] - coord[1]) > 0)? 1: -1;
+	while(coord[0] <= coord[2])
 	{
-		mlx_pixel_put(mlx_ptr, win_ptr, x0, y0, 0xFFFFFF);
-		error = error + ft_absolute(y1 - y0);
+		mlx_pixel_put(mlx_ptr, win_ptr, coord[0], coord[1], 0xFFFFFF);
+		error = error + ft_absolute(coord[3] - coord[1]);
 		if (2 * error >= deltax)
 		{
-			y0 = y0 + diry;
+			coord[1] = coord[1] + diry;
 			error = error - deltax;
 		}
-		x0++;
+		coord[0]++;
 	}
 }
 
-void drow_line(t_list *list, void *mlx_ptr, void *win_ptr)
+
+t_list *drow_line(t_list *list, void *mlx_ptr, void *win_ptr)
 {
+	t_list	*sub;
 	ft_lstreverse(&list);
-	while(list->next)
+	
+	sub = list;
+	while (sub->next)
 	{
-    	bresenham_original(list, mlx_ptr, win_ptr);
-		list = list->next;
+		((int*)(sub->next->content))[0] = ((int*)(sub->next->content))[0] * 10;
+		((int*)(sub->next->content))[1] = ((int*)(sub->next->content))[1] * 10;
+		((int*)(sub->next->content))[2] = ((int*)(sub->next->content))[2] * 10;
+    	bresenham_original(sub, mlx_ptr, win_ptr);
+		sub = sub->next;
 	}
+	return(list);
+
 }
