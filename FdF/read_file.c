@@ -6,21 +6,23 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:14:31 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/18 18:03:08 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/20 19:32:10 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <fcntl.h>
 
-void    zero_list(t_list *list)
+void    init_list(void *mlx_ptr, void *win_ptr, t_list *list)
 {
-    ((int*)(list->content))[0] = -1;
-	((int*)(list->content))[1] = -1;
-	((int*)(list->content))[2] = 0;
+    ((t_point*)(list->content))->x = -1;
+    ((t_point*)(list->content))->y = -1;
+    ((t_point*)(list->content))->z = 0;
+    ((t_point*)(list->content))->mlx_ptr = mlx_ptr;
+    ((t_point*)(list->content))->win_ptr = win_ptr;
 }
 
-t_list    *read_file(char *file)
+t_list    *read_file(char *file, void *mlx_ptr, void *win_ptr)
 {
     int     fd;
     t_list  *c_list;
@@ -33,18 +35,18 @@ t_list    *read_file(char *file)
         write(1, "bad fd", 6);
         return (0);
     }
-    c_list = ft_lstnew("0", 3 * sizeof(int));
-    zero_list(c_list);
+    c_list = ft_lstnew("0", sizeof(t_point));
+    init_list(mlx_ptr, win_ptr, c_list);
     while (get_next_line(fd, &line))
     {
-        ((int*)(c_list->content))[0] = -1;
+        ((t_point*)(c_list->content))->x = -1;
         split_line = ft_strsplit(line, ' ');
-        ((int*)(c_list->content))[1]++;
+        ((t_point*)(c_list->content))->y++;
         while (*split_line)
         {
-            ((int*)(c_list->content))[0]++;
-            ((int*)(c_list->content))[2] = atoi(*split_line);
-            ft_lstadd(&c_list, ft_lstnew(c_list->content, 3 * sizeof(int)));
+            ((t_point*)(c_list->content))->x++;
+            ((t_point*)(c_list->content))->z = atoi(*split_line);
+            ft_lstadd(&c_list, ft_lstnew(c_list->content, sizeof(t_point)));
             split_line++;
         }
     }
