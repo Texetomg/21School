@@ -6,13 +6,13 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 21:29:47 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/20 19:30:19 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/20 20:48:21 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void bresenham(void *mlx_ptr, void *win_ptr, int x1, int y1, int x2, int y2) {
+void	bresenham(void *mlx_ptr, void *win_ptr, int x1, int y1, int x2, int y2) {
     int deltaX = ft_absolute(x2 - x1);
     int deltaY = ft_absolute(y2 - y1);
     int signX = x1 < x2 ? 1 : -1;
@@ -37,28 +37,17 @@ void bresenham(void *mlx_ptr, void *win_ptr, int x1, int y1, int x2, int y2) {
     }
 }
 
-t_list *draw_img(t_list *list)
+void	draw_img(t_list *list)
 {
 	t_list	*sub;
 	t_list	*sec_sub;
 	t_list	*res_sub;
 
-	ft_lstreverse(&list);
 	sub = list;
-	((t_point*)(sub->content))->x *= 50;
-	((t_point*)(sub->content))->y *= 50;
-	((t_point*)(sub->content))->z *= 50;
 	while (sub->next)
 	{	
-		
-		((t_point*)(sub->next->content))->x *= 50;
-		((t_point*)(sub->next->content))->y *= 50;
-		((t_point*)(sub->next->content))->z *= 50;
 		if (((t_point*)(sub->content))->x  < ((t_point*)(sub->next->content))->x)
-		{
-		ft_putchar('.');
 			bresenham(((t_point*)(sub->content))->mlx, ((t_point*)(sub->content))->win, ((t_point*)(sub->content))->x, ((t_point*)(sub->content))->y, ((t_point*)(sub->next->content))->x, ((t_point*)(sub->next->content))->y);
-		}
 		sub = sub->next;
 	}
 	sub = list;
@@ -79,5 +68,4 @@ t_list *draw_img(t_list *list)
 		sec_sub = sec_sub->next;
 		sub = sub->next;
 	}
-	return(list);
 }
