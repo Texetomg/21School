@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 21:29:47 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/20 20:48:21 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/21 12:12:39 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ void	bresenham(void *mlx_ptr, void *win_ptr, int x1, int y1, int x2, int y2) {
     int signY = y1 < y2 ? 1 : -1;
     int error = deltaX - deltaY;
 	int error2;
-    mlx_pixel_put(mlx_ptr, win_ptr, x2, y2, 0xFFFFFF);
+    mlx_pixel_put(mlx_ptr, win_ptr, (int)x2, (int)y2, 0xFFFFFF);
     while(x1 != x2 || y1 != y2) 
    {
-        mlx_pixel_put(mlx_ptr, win_ptr, x1, y1, 0xFFFFFF);
+        mlx_pixel_put(mlx_ptr, win_ptr, (int)x1, (int)y1, 0xFFFFFF);
         error2 = error * 2;
         if(error2 > -deltaY) 
         {

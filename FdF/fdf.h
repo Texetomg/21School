@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:19:38 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/20 20:48:24 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/21 12:12:02 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,13 @@
 
 typedef struct		s_point
 {
-	int x;
-	int y;
-	int z;
+	double x;
+	double y;
+	double z;
+	int	x_count;
+	int	y_count;
+	int x_pos;
+	int y_pos;
 	int size;
 	void *mlx;
 	void *win;

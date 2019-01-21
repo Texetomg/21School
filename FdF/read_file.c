@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:14:31 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/20 20:13:47 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/21 12:11:28 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ void    init_list(void *mlx_ptr, void *win_ptr, t_list *list)
     ((t_point*)(list->content))->x = -1;
     ((t_point*)(list->content))->y = -1;
     ((t_point*)(list->content))->z = 0;
+    ((t_point*)(list->content))->x_count = -1;
+    ((t_point*)(list->content))->y_count = -1;
+    ((t_point*)(list->content))->x_pos = -1;
+    ((t_point*)(list->content))->y_pos = -1;
     ((t_point*)(list->content))->mlx = mlx_ptr;
     ((t_point*)(list->content))->win = win_ptr;
 }

@@ -6,11 +6,25 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 14:51:10 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/20 20:54:22 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/21 12:22:17 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	resize_img(t_list *list, double size)
+{
+	((t_point*)(list->content))->x *= size;
+	((t_point*)(list->content))->y *= size;
+	((t_point*)(list->content))->z *= size;
+	while (list->next)
+	{
+		((t_point*)(list->next->content))->x *= size;
+		((t_point*)(list->next->content))->y *= size;
+		((t_point*)(list->next->content))->z *= size;
+		list = list->next;
+	}
+}
 
 int	deal_key(int key, t_list *list)
 {
@@ -22,32 +36,14 @@ int	deal_key(int key, t_list *list)
 	{
 		mlx_clear_window(((t_point*)(list->content))->mlx, ((t_point*)(list->content))->win);
 		sub = list;
-		((t_point*)(sub->content))->x *= 2;
-		((t_point*)(sub->content))->y *= 2;
-		((t_point*)(sub->content))->z *= 2;
-		while (sub->next)
-		{
-			((t_point*)(sub->next->content))->x *= 2;
-			((t_point*)(sub->next->content))->y *= 2;
-			((t_point*)(sub->next->content))->z *= 2;
-			sub = sub->next;
-		}
+		resize_img(sub, 1.1);
 		draw_img(list);
 	}
 	if (key == 78)
 	{
 		mlx_clear_window(((t_point*)(list->content))->mlx, ((t_point*)(list->content))->win);
 		sub = list;
-		((t_point*)(sub->content))->x /= 2;
-		((t_point*)(sub->content))->y /= 2;
-		((t_point*)(sub->content))->z /= 2;
-		while (sub->next)
-		{
-			((t_point*)(sub->next->content))->x /= 2;
-			((t_point*)(sub->next->content))->y /= 2;
-			((t_point*)(sub->next->content))->z /= 2;
-			sub = sub->next;
-		}
+		resize_img(sub, 0.9);
 		draw_img(list);
 	}
 	return (0);
@@ -70,16 +66,7 @@ int main(int ac, char **av)
 	win_ptr = mlx_new_window(mlx_ptr, 750, 750, "mlx");
 	list = read_file(av[1], mlx_ptr, win_ptr);
 	sub = list;
-	((t_point*)(sub->content))->x *= 50;
-	((t_point*)(sub->content))->y *= 50;
-	((t_point*)(sub->content))->z *= 50;
-	while (sub->next)
-	{	
-		((t_point*)(sub->next->content))->x *= 50;
-		((t_point*)(sub->next->content))->y *= 50;
-		((t_point*)(sub->next->content))->z *= 50;
-		sub = sub->next;
-	}
+	resize_img(sub, 50);
 	ft_lstreverse(&list);
 	draw_img(list);
 	mlx_key_hook(win_ptr, deal_key, list);
