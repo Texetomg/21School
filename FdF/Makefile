@@ -6,13 +6,13 @@
 #    By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/01/15 17:19:19 by bfalmer-          #+#    #+#              #
-#    Updated: 2019/01/21 17:09:29 by bfalmer-         ###   ########.fr        #
+#    Updated: 2019/01/21 18:14:46 by bfalmer-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fdf
 FLAGS = -Wall -Wextra -Werror -g
-SRCS = main.c read_file.c draw_line.c img_change_funcs.c
+SRCS = main.c read_file.c img.draw.c img_change_funcs.c
 OBJS = $(SRCS:.c=.o)
 INC = fdf.h
 FRAMEWORKS = -framework OpenGL -framework AppKit
