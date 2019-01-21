@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 21:29:47 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/21 12:12:39 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/21 14:10:55 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	bresenham(void *mlx_ptr, void *win_ptr, int x1, int y1, int x2, int y2) {
     }
 }
 
-void	draw_img(t_list *list)
+void	img_draw(t_list *list)
 {
 	t_list	*sub;
 	t_list	*sec_sub;
@@ -46,7 +46,7 @@ void	draw_img(t_list *list)
 	sub = list;
 	while (sub->next)
 	{	
-		if (((t_point*)(sub->content))->x  < ((t_point*)(sub->next->content))->x)
+		if (((t_point*)(sub->content))->x_pos  < ((t_point*)(sub->next->content))->x_pos)
 			bresenham(((t_point*)(sub->content))->mlx, ((t_point*)(sub->content))->win, ((t_point*)(sub->content))->x, ((t_point*)(sub->content))->y, ((t_point*)(sub->next->content))->x, ((t_point*)(sub->next->content))->y);
 		sub = sub->next;
 	}
@@ -54,7 +54,7 @@ void	draw_img(t_list *list)
 	sec_sub = list;
 	res_sub = ft_lstnew("0", sizeof(t_point));
 	ft_lstadd(&res_sub, ft_lstnew("0", sizeof(t_point)));
-	while (((t_point*)(sec_sub->content))->y == ((t_point*)(sub->content))->x)
+	while (((t_point*)(sec_sub->content))->y_count == ((t_point*)(sub->content))->y_count)
 			sec_sub = sec_sub->next;
 	while (sec_sub->next)
 	{	

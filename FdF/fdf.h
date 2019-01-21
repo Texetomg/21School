@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:19:38 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/21 12:12:02 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/21 14:10:45 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,15 +20,14 @@ typedef struct		s_point
 	double x;
 	double y;
 	double z;
-	int	x_count;
 	int	y_count;
 	int x_pos;
-	int y_pos;
 	int size;
 	void *mlx;
 	void *win;
 }					t_point;
 t_list		*read_file(char *file, void *mlx_ptr, void *win_ptr);
-void		draw_img(t_list *list);
+void		img_draw(t_list *list);
+void    	add_sub_coords(t_list **list);
 
 #endif
