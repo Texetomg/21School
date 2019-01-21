@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 14:51:10 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/21 17:08:10 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/21 20:55:14 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 void	img_resize(t_list *list, double size)
 {
-	((t_point*)(list->content))->x *= size;
-	((t_point*)(list->content))->y *= size;
-	((t_point*)(list->content))->z *= size;
+	((t_point*)(list->content))->size *= size;
 	while (list->next)
 	{
-		((t_point*)(list->next->content))->x *= size;
-		((t_point*)(list->next->content))->y *= size;
-		((t_point*)(list->next->content))->z *= size;
+		((t_point*)(list->next->content))->size *= size;
 		list = list->next;
 	}
 }
@@ -33,13 +29,13 @@ void	which_func(int key, t_list *sub)
 	if (key == 78)
 		img_resize(sub, 0.9);
 	if (key == 123)
-		img_move_x(sub, -10);
+		img_move_x(sub, -5);
 	if (key == 124)
-		img_move_x(sub, 10);
+		img_move_x(sub, 5);
 	if (key == 125)
-		img_move_y(sub, 10);
+		img_move_y(sub, 5);
 	if (key == 126)
-		img_move_y(sub, -10);
+		img_move_y(sub, -5);
 	if (key == 91)
 		img_rotate_x(sub, teta);
 	if (key == 84)
@@ -81,7 +77,8 @@ int main(int ac, char **av)
 	}
 	mlx_ptr = mlx_init();
 	win_ptr = mlx_new_window(mlx_ptr, 850, 850, "mlx");
-	list = read_file(av[1], mlx_ptr, win_ptr);
+	if((list = read_file(av[1], mlx_ptr, win_ptr)) == 0)
+		ft_putstr("bad fd");
 	sub = list;
 	img_resize(sub, 10);
 	ft_lstreverse(&list);

@@ -6,13 +6,13 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:01:27 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/21 17:09:39 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/21 20:24:18 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	img_move_x(t_list *list, double step)
+void	img_move_x(t_list *list, int step)
 {
 	((t_point*)(list->content))->x += step;
 	while (list->next)
@@ -22,7 +22,7 @@ void	img_move_x(t_list *list, double step)
 	}
 }
 
-void	img_move_y(t_list *list, double step)
+void	img_move_y(t_list *list, int step)
 {
 	((t_point*)(list->content))->y += step;
 	while (list->next)
@@ -41,8 +41,8 @@ void	img_rotate_x(t_list *list, double angle)
 	{
 		y = ((t_point*)(list->content))->y;
 		z = ((t_point*)(list->content))->z;
-		((t_point*)(list->content))->y = (y * cos(angle)) + (z * sin(angle));
-		((t_point*)(list->content))->z = (-y * sin(angle)) + (z * cos(angle));
+		((t_point*)(list->content))->y_scale += (y * cos(angle)) + (z * sin(angle));
+		((t_point*)(list->content))->z_scale += (-y * sin(angle)) + (z * cos(angle));
 		list = list->next;
 	}
 }
@@ -56,8 +56,8 @@ void	img_rotate_y(t_list *list, double angle)
 	{
 		x = ((t_point*)(list->content))->x;
 		z = ((t_point*)(list->content))->z;
-		((t_point*)(list->content))->x = (x * cos(angle)) + (z * sin(angle));
-		((t_point*)(list->content))->z = (-x * sin(angle)) + (z * cos(angle));
+		((t_point*)(list->content))->x_scale += (x * cos(angle)) + (z * sin(angle));
+		((t_point*)(list->content))->z_scale += (-x * sin(angle)) + (z * cos(angle));
 		list = list->next;
 	}
 }
@@ -71,8 +71,8 @@ void	img_rotate_z(t_list *list, double angle)
 	{
 		x = ((t_point*)(list->content))->x;
 		y = ((t_point*)(list->content))->y;
-		((t_point*)(list->content))->x = (x * cos(angle)) - (y * sin(angle));
-		((t_point*)(list->content))->y = (x * sin(angle)) + (y * cos(angle));
+		((t_point*)(list->content))->x_scale = (x * cos(angle)) - (y * sin(angle));
+		((t_point*)(list->content))->y_scale = (x * sin(angle)) + (y * cos(angle));
 		list = list->next;
 	}
 }

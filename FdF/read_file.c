@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:14:31 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/21 14:00:28 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/21 21:52:15 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,10 @@ void    init_list(void *mlx_ptr, void *win_ptr, t_list *list)
     ((t_point*)(list->content))->x = -1;
     ((t_point*)(list->content))->y = -1;
     ((t_point*)(list->content))->z = 0;
+    ((t_point*)(list->content))->size = 1;
+    ((t_point*)(list->content))->x_scale = 0;
+    ((t_point*)(list->content))->y_scale = 0;
+    ((t_point*)(list->content))->z_scale = 0;
     ((t_point*)(list->content))->x_pos = -1;
     ((t_point*)(list->content))->y_count = 0;
     ((t_point*)(list->content))->mlx = mlx_ptr;
@@ -56,10 +60,7 @@ t_list    *read_file(char *file, void *mlx_ptr, void *win_ptr)
    
     fd = open(file, O_RDONLY);
     if (fd < 0)
-    {
-        write(1, "bad fd", 6);
         return (0);
-    }
     c_list = ft_lstnew("0", sizeof(t_point));
     init_list(mlx_ptr, win_ptr, c_list);
     while (get_next_line(fd, &line))
