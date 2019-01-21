@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 14:51:10 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/21 14:18:58 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/21 17:08:10 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,24 +26,32 @@ void	img_resize(t_list *list, double size)
 	}
 }
 
-void	img_move_x(t_list *list, int step)
+void	which_func(int key, t_list *sub)
 {
-	((t_point*)(list->content))->x += step;
-	while (list->next)
-	{
-		((t_point*)(list->next->content))->x += step;
-		list = list->next;
-	}
-}
-
-void	img_move_y(t_list *list, int step)
-{
-	((t_point*)(list->content))->y += step;
-	while (list->next)
-	{
-		((t_point*)(list->next->content))->y += step;
-		list = list->next;
-	}
+	if (key == 69)
+		img_resize(sub, 1.1);
+	if (key == 78)
+		img_resize(sub, 0.9);
+	if (key == 123)
+		img_move_x(sub, -10);
+	if (key == 124)
+		img_move_x(sub, 10);
+	if (key == 125)
+		img_move_y(sub, 10);
+	if (key == 126)
+		img_move_y(sub, -10);
+	if (key == 91)
+		img_rotate_x(sub, teta);
+	if (key == 84)
+		img_rotate_x(sub, -teta);
+	if (key == 86)
+		img_rotate_y(sub, teta);
+	if (key == 88)
+		img_rotate_y(sub, -teta);
+	if (key == 89)
+		img_rotate_z(sub, teta);
+	if (key == 85)
+		img_rotate_z(sub, -teta);
 }
 
 int	deal_key(int key, t_list *list)
@@ -52,48 +60,10 @@ int	deal_key(int key, t_list *list)
 
 	if (key == 53)
 		exit(0);
-	if (key == 69)
-	{
-		mlx_clear_window(((t_point*)(list->content))->mlx, ((t_point*)(list->content))->win);
-		sub = list;
-		img_resize(sub, 1.1);
-		img_draw(list);
-	}
-	if (key == 78)
-	{
-		mlx_clear_window(((t_point*)(list->content))->mlx, ((t_point*)(list->content))->win);
-		sub = list;
-		img_resize(sub, 0.9);
-		img_draw(list);
-	}
-	if (key == 123)
-	{
-		mlx_clear_window(((t_point*)(list->content))->mlx, ((t_point*)(list->content))->win);
-		sub = list;
-		img_move_x(sub, -10);
-		img_draw(list);
-	}
-	if (key == 124)
-	{
-		mlx_clear_window(((t_point*)(list->content))->mlx, ((t_point*)(list->content))->win);
-		sub = list;
-		img_move_x(sub, 10);
-		img_draw(list);
-	}
-	if (key == 125)
-	{
-		mlx_clear_window(((t_point*)(list->content))->mlx, ((t_point*)(list->content))->win);
-		sub = list;
-		img_move_y(sub, 10);
-		img_draw(list);
-	}
-	if (key == 126)
-	{
-		mlx_clear_window(((t_point*)(list->content))->mlx, ((t_point*)(list->content))->win);
-		sub = list;
-		img_move_y(sub, -10);
-		img_draw(list);
-	}
+	mlx_clear_window(((t_point*)(list->content))->mlx, ((t_point*)(list->content))->win);
+	sub = list;
+	which_func(key, sub);
+	img_draw(list);
 	return (0);
 }
 
@@ -113,20 +83,9 @@ int main(int ac, char **av)
 	win_ptr = mlx_new_window(mlx_ptr, 850, 850, "mlx");
 	list = read_file(av[1], mlx_ptr, win_ptr);
 	sub = list;
-	img_resize(sub, 50);
-	
+	img_resize(sub, 10);
 	ft_lstreverse(&list);
-	
 	add_sub_coords(&list);
-	/*while (list->next)
-	{
-		ft_putnbr(((t_point*)(list->content))->x_pos);
-		ft_putchar(' ');
-		ft_putnbr(((t_point*)(list->content))->y_count);
-		ft_putchar('\n');
-		list = list->next;
-	}*/
-
 	img_draw(list);
 	mlx_key_hook(win_ptr, deal_key, list);
 	mlx_loop(mlx_ptr);
