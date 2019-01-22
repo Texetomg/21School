@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 14:51:10 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/22 19:46:38 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/22 20:07:05 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,40 +14,40 @@
 
 void	img_resize(t_list *list, double size)
 {
-	((t_point*)(list->content))->size *= size;
+	LIST->size *= size;
 	while (list->next)
 	{
-		((t_point*)(list->next->content))->size *= size;
+		LIST_N->size *= size;
 		list = list->next;
 	}
 }
 
-void	which_func(int key, t_list *sub)
+void	which_func(int key, t_list *list)
 {
 	if (key == 69)
-		img_resize(sub, 1.1);
+		img_resize(list, 1.1);
 	if (key == 78)
-		img_resize(sub, 0.9);
+		img_resize(list, 0.9);
 	if (key == 123)
-		img_move_x(sub, -5);
+		img_move_x(list, -5);
 	if (key == 124)
-		img_move_x(sub, 5);
+		img_move_x(list, 5);
 	if (key == 125)
-		img_move_y(sub, 5);
+		img_move_y(list, 5);
 	if (key == 126)
-		img_move_y(sub, -5);
+		img_move_y(list, -5);
 	if (key == 91)
-		img_rotate_x(sub, TETA);
+		img_rotate_x(list, TETA);
 	if (key == 84)
-		img_rotate_x(sub, -TETA);
+		img_rotate_x(list, -TETA);
 	if (key == 86)
-		img_rotate_y(sub, TETA);
+		img_rotate_y(list, TETA);
 	if (key == 88)
-		img_rotate_y(sub, -TETA);
+		img_rotate_y(list, -TETA);
 	if (key == 89)
-		img_rotate_z(sub, TETA);
+		img_rotate_z(list, TETA);
 	if (key == 85)
-		img_rotate_z(sub, -TETA);
+		img_rotate_z(list, -TETA);
 }
 
 int	deal_key(int key, t_list *list)
@@ -56,7 +56,7 @@ int	deal_key(int key, t_list *list)
 
 	if (key == 53)
 		exit(0);
-	mlx_clear_window(((t_point*)(list->content))->mlx, ((t_point*)(list->content))->win);
+	mlx_clear_window(LIST->mlx, LIST->win);
 	sub = list;
 	which_func(key, sub);
 	img_draw(list);
@@ -79,6 +79,7 @@ int main(int ac, char **av)
 	win_ptr = mlx_new_window(mlx_ptr, 850, 850, "mlx");
 	if((list = read_file(av[1], mlx_ptr, win_ptr)) == 0)
 		ft_putstr("bad fd");
+	
 	sub_list = list;
 	img_resize(sub_list, 10);
 	ft_lstreverse(&list);

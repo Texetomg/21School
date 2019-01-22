@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:01:27 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/22 19:26:49 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/22 20:08:29 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,50 @@
 
 void	img_move_x(t_list *list, int step)
 {
-	((t_point*)(list->content))->x_step += step;
+	LIST->x_step += step;
 	while (list->next)
 	{
-		((t_point*)(list->next->content))->x_step += step;
+		LIST_N->x_step += step;
 		list = list->next;
 	}
 }
 
 void	img_move_y(t_list *list, int step)
 {
-	((t_point*)(list->content))->y_step += step;
+	LIST->y_step += step;
 	while (list->next)
 	{
-		((t_point*)(list->next->content))->y_step += step;
+		LIST_N->y_step += step;
 		list = list->next;
 	}
 }
 
 void	img_rotate_x(t_list *list, double angle)
 {
-	((t_point*)(list->content))->alf += angle;
+	LIST->alf += angle;
 	while (list->next)
 	{	
-		((t_point*)(list->next->content))->alf += angle;
+		LIST_N->alf += angle;
 			list = list->next;
 	}
 }
 
 void	img_rotate_y(t_list *list, double angle)
 {
-	((t_point*)(list->content))->bet += angle;
+	LIST->bet += angle;
 	while (list->next)
 	{
-		((t_point*)(list->next->content))->bet += angle;
+		LIST_N->bet += angle;
 		list = list->next;
 	}	
 }
 
 void	img_rotate_z(t_list *list, double angle)
 {
-	((t_point*)(list->content))->gam += angle;
+	LIST->gam += angle;
 	while (list->next)
 	{
-		((t_point*)(list->next->content))->gam += angle;
+		LIST_N->gam += angle;
 		list = list->next;
 	}
 }

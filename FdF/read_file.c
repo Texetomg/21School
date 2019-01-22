@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:14:31 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/22 19:47:36 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/22 20:08:30 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,22 @@
 
 void    init_list(void *mlx_ptr, void *win_ptr, t_list *list)
 {
-    ((t_point*)(list->content))->x = -1;
-    ((t_point*)(list->content))->y = -1;
-    ((t_point*)(list->content))->z = 0;
-    ((t_point*)(list->content))->size = 3;
-    ((t_point*)(list->content))->x_step = 50;
-    ((t_point*)(list->content))->y_step = 50;
-    ((t_point*)(list->content))->alf = 0.1;
-    ((t_point*)(list->content))->bet = 0.1;
-    ((t_point*)(list->content))->gam = 0.1;
-    ((t_point*)(list->content))->x_curr = 0;
-    ((t_point*)(list->content))->y_curr = 0;
-    ((t_point*)(list->content))->z_curr = 0;
-    ((t_point*)(list->content))->x_pos = -1;
-    ((t_point*)(list->content))->y_count = 0;
-    ((t_point*)(list->content))->mlx = mlx_ptr;
-    ((t_point*)(list->content))->win = win_ptr;
+    LIST->x = -1;
+    LIST->y = -1;
+    LIST->z = 0;
+    LIST->size = 3;
+    LIST->x_step = 50;
+    LIST->y_step = 50;
+    LIST->alf = 0.1;
+    LIST->bet = 0.1;
+    LIST->gam = 0.1;
+    LIST->x_curr = 0;
+    LIST->y_curr = 0;
+    LIST->z_curr = 0;
+    LIST->x_pos = -1;
+    LIST->y_count = 0;
+    LIST->mlx = mlx_ptr;
+    LIST->win = win_ptr;
 }
 
 void    add_sub_coords(t_list **list)
@@ -45,12 +45,12 @@ void    add_sub_coords(t_list **list)
         
     while (sub_list->next)
     {
-        ((t_point*)(sub_list->content))->x_curr = ((t_point*)(sub_list->content))->x;
-        ((t_point*)(sub_list->content))->y_curr = ((t_point*)(sub_list->content))->y; 
-        ((t_point*)(sub_list->content))->z_curr = ((t_point*)(sub_list->content))->z;   
-        ((t_point*)(sub_list->content))->y_count = y_count;
-        ((t_point*)(sub_list->content))->x_pos = x_pos;
-        if (((t_point*)(sub_list->content))->x  > ((t_point*)(sub_list->next->content))->x)
+        SUB_LIST->x_curr = SUB_LIST->x;
+        SUB_LIST->y_curr = SUB_LIST->y; 
+        SUB_LIST->z_curr = SUB_LIST->z;   
+        SUB_LIST->y_count = y_count;
+        SUB_LIST->x_pos = x_pos;
+        if (SUB_LIST->x  > SUB_LIST_N->x)
         {
             y_count++;
             x_pos = -1;
@@ -75,13 +75,13 @@ t_list    *read_file(char *file, void *mlx_ptr, void *win_ptr)
     init_list(mlx_ptr, win_ptr, list);
     while (get_next_line(fd, &line))
     {
-        ((t_point*)(list->content))->x = -1;
+        LIST->x = -1;
         split_line = ft_strsplit(line, ' ');
-        ((t_point*)(list->content))->y++;
+        LIST->y++;
         while (*split_line)
         {
-            ((t_point*)(list->content))->x++;
-            ((t_point*)(list->content))->z = atoi(*split_line);
+            LIST->x++;
+            LIST->z = atoi(*split_line);
             ft_lstadd(&list, ft_lstnew(list->content, sizeof(t_point)));
             split_line++;
         }
