@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:01:27 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/22 18:33:31 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/22 19:26:49 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	img_rotate_x(t_list *list, double angle)
 	((t_point*)(list->content))->alf += angle;
 	while (list->next)
 	{	
-		((t_point*)(list->content))->alf += angle;
+		((t_point*)(list->next->content))->alf += angle;
 			list = list->next;
 	}
 }
