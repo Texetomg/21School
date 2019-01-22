@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/21 17:01:27 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/21 20:24:18 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/22 18:33:31 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,65 +14,70 @@
 
 void	img_move_x(t_list *list, int step)
 {
-	((t_point*)(list->content))->x += step;
+	((t_point*)(list->content))->x_step += step;
 	while (list->next)
 	{
-		((t_point*)(list->next->content))->x += step;
+		((t_point*)(list->next->content))->x_step += step;
 		list = list->next;
 	}
 }
 
 void	img_move_y(t_list *list, int step)
 {
-	((t_point*)(list->content))->y += step;
+	((t_point*)(list->content))->y_step += step;
 	while (list->next)
 	{
-		((t_point*)(list->next->content))->y += step;
+		((t_point*)(list->next->content))->y_step += step;
 		list = list->next;
 	}
 }
 
 void	img_rotate_x(t_list *list, double angle)
 {
-	int y;
-	int z;
-
+	((t_point*)(list->content))->alf += angle;
 	while (list->next)
-	{
-		y = ((t_point*)(list->content))->y;
-		z = ((t_point*)(list->content))->z;
-		((t_point*)(list->content))->y_scale += (y * cos(angle)) + (z * sin(angle));
-		((t_point*)(list->content))->z_scale += (-y * sin(angle)) + (z * cos(angle));
-		list = list->next;
+	{	
+		((t_point*)(list->content))->alf += angle;
+			list = list->next;
 	}
 }
 
 void	img_rotate_y(t_list *list, double angle)
 {
-	int x;
-	int z;
-
+	((t_point*)(list->content))->bet += angle;
 	while (list->next)
 	{
-		x = ((t_point*)(list->content))->x;
-		z = ((t_point*)(list->content))->z;
-		((t_point*)(list->content))->x_scale += (x * cos(angle)) + (z * sin(angle));
-		((t_point*)(list->content))->z_scale += (-x * sin(angle)) + (z * cos(angle));
+		((t_point*)(list->next->content))->bet += angle;
 		list = list->next;
-	}
+	}	
 }
 
 void	img_rotate_z(t_list *list, double angle)
 {
-	int x;
-	int y;
-
+	((t_point*)(list->content))->gam += angle;
 	while (list->next)
 	{
-		x = ((t_point*)(list->content))->x;
-		y = ((t_point*)(list->content))->y;
-		((t_point*)(list->content))->x_scale = (x * cos(angle)) - (y * sin(angle));
-		((t_point*)(list->content))->y_scale = (x * sin(angle)) + (y * cos(angle));
+		((t_point*)(list->next->content))->gam += angle;
 		list = list->next;
 	}
+}
+
+void		rotation_matrix(t_list *list, int *arr)
+{
+	int 	x;
+	int 	y;
+	int		z;
+	
+	x = arr[0];
+	y = arr[1];
+	z = arr[2];
+	arr[0] = cos(BET) * cos(GAM) * x - cos(BET) * sin(GAM) * y + sin(BET) * z;
+	arr[1] = sin(ALF) * sin(BET) * cos(GAM) + cos(ALF) *sin(GAM) * x - 
+			sin(ALF) * sin(BET) * sin(GAM) + cos(ALF) * cos(GAM) * y - sin(ALF) * cos(BET) * z;
+	x = arr[3];
+	y = arr[4];
+	z = arr[5];
+	arr[3] = cos(BET) * cos(GAM) * x - cos(BET) * sin(GAM) * y + sin(BET) * z;
+	arr[4] = sin(ALF) * sin(BET) * cos(GAM) + cos(ALF) *sin(GAM) * x - 
+			sin(ALF) * sin(BET) * sin(GAM) + cos(ALF) * cos(GAM) * y - sin(ALF) * cos(BET) * z;
 }
