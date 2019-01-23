@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 21:29:47 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/23 13:30:59 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/23 14:55:06 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,25 @@ void	fill_horiz_coord_array(t_list *list, int *arr)
 	arr[5] = LIST_N->z_curr * LIST->size;
 }
 
-void	draw_vert(t_list *sub_list, t_list *sec_sub, int *arr)
+void	draw_vert (t_list *sub_list, t_list *sec_sub, int *arr)
 {
-	fill_vert_coord_array(sub_list, sec_sub, arr);
-	rotation_matrix(sub_list, arr);
-	bresenham(SUB_LIST->mlx, SUB_LIST->win, arr);
-	sec_sub = sec_sub->next;
-	sub_list = sub_list->next;
+	while (SEC_SUB->y_count == SUB_LIST->y_count)
+		sec_sub = sec_sub->next;
+	while (sec_sub->next)
+	{
+		fill_vert_coord_array(sub_list, sec_sub, arr);
+		rotation_matrix(sub_list, arr);
+		bresenham(SUB_LIST->mlx, SUB_LIST->win, arr);
+		while (SEC_SUB_N->x_pos > SUB_LIST_N->x_pos)
+			sec_sub = sec_sub->next;
+		while (SEC_SUB_N->x_pos < SUB_LIST_N->x_pos)
+			sub_list = sub_list->next;
+		fill_vert_coord_array(sub_list, sec_sub, arr);
+		rotation_matrix(sub_list, arr);
+		bresenham(SUB_LIST->mlx, SUB_LIST->win, arr);
+		sec_sub = sec_sub->next;
+		sub_list = sub_list->next;
+	}
 }
 
 void	img_draw(t_list *list)
@@ -86,17 +98,5 @@ void	img_draw(t_list *list)
 	}
 	sub_list = list;
 	sec_sub = list;
-	while (SEC_SUB->y_count == SUB_LIST->y_count)
-		sec_sub = sec_sub->next;
-	while (sec_sub->next)
-	{
-		draw_vert(sub_list, sec_sub, out_arr);
-		while (SEC_SUB_N->x_pos > SUB_LIST_N->x_pos)
-			sec_sub = sec_sub->next;
-		while (SEC_SUB_N->x_pos < SUB_LIST_N->x_pos)
-			sub_list = sub_list->next;
-		draw_vert(sub_list, sec_sub, out_arr);
-		sec_sub = sec_sub->next;
-		sub_list = sub_list->next;
-	}
+	draw_vert(sub_list, sec_sub, out_arr);
 }
