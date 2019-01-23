@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 21:29:47 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/23 15:42:22 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/23 17:36:50 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	bresenham(void *mlx_ptr, void *win_ptr, int *arr)
 	delta_x = ft_absolute(arr[3] - arr[0]);
 	delta_y = ft_absolute(arr[4] - arr[1]);
 	error = delta_x - delta_y;
-	mlx_pixel_put(mlx_ptr, win_ptr, arr[3], arr[4], 0x00FF00);
+	mlx_pixel_put(mlx_ptr, win_ptr, arr[3], arr[4], 0xFFFFFF);
 	while (arr[0] != arr[3] || arr[1] != arr[4])
 	{
-		mlx_pixel_put(mlx_ptr, win_ptr, arr[0], arr[1], 0x00FF00);
+		mlx_pixel_put(mlx_ptr, win_ptr, arr[0], arr[1], 0xFF00FF);
 		error2 = error * 2;
 		if (error2 > -delta_y)
 		{
@@ -60,12 +60,12 @@ void	fill_horiz_coord_array(t_list *list, int *arr)
 	arr[5] = LIST_N->z_curr * LIST->size;
 }
 
-void	draw_vert (t_list *sub_list, t_list *sec_sub, int *arr)
+void	draw_vert(t_list *sub_list, t_list *sec_sub, int *arr)
 {
 	while (SEC_SUB->y_count == SUB_LIST->y_count)
 	{
 		if (sec_sub->next == 0)
-			break;
+			break ;
 		sec_sub = sec_sub->next;
 	}
 	while (sec_sub->next)
@@ -89,7 +89,7 @@ void	img_draw(t_list *list)
 {
 	t_list	*sub_list;
 	t_list	*sec_sub;
-	int		out_arr[10];
+	int		out_arr[7];
 
 	sub_list = list;
 	while (sub_list->next)

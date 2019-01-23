@@ -6,26 +6,26 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/16 14:19:38 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/23 14:55:22 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/23 19:35:12 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF
-# define FDF
+#ifndef FDF_H
+# define FDF_H
 # include "minilibx_macos/mlx.h"
 # include "libft/libft.h"
 # include <math.h>
 # include <fcntl.h>
 # define TETA 0.1
-# define ALF ((t_point*)(list->content))->alf
-# define BET ((t_point*)(list->content))->bet
-# define GAM ((t_point*)(list->content))->gam
-# define LIST ((t_point*)(list->content))
-# define LIST_N ((t_point*)(list->next->content))
-# define SUB_LIST ((t_point*)(sub_list->content))
+# define ALF		((t_point*)(list->content))->alf
+# define BET 		((t_point*)(list->content))->bet
+# define GAM 		((t_point*)(list->content))->gam
+# define LIST 		((t_point*)(list->content))
+# define LIST_N 	((t_point*)(list->next->content))
+# define SUB_LIST 	((t_point*)(sub_list->content))
 # define SUB_LIST_N ((t_point*)(sub_list->next->content))
-# define SEC_SUB ((t_point*)(sec_sub->content))
-# define SEC_SUB_N ((t_point*)(sec_sub->next->content))
+# define SEC_SUB 	((t_point*)(sec_sub->content))
+# define SEC_SUB_N 	((t_point*)(sec_sub->next->content))
 
 typedef struct		s_point
 {
