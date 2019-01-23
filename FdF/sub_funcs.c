@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 14:18:58 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/23 14:32:37 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/23 16:10:18 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ void	init_list(void *mlx_ptr, void *win_ptr, t_list *list)
 	LIST->size = 3;
 	LIST->x_step = 50;
 	LIST->y_step = 50;
-	LIST->alf = 0.523;
-	LIST->bet = 0.523;
-	LIST->gam = 0.1;
+	LIST->alf = 0;
+	LIST->bet = 0;
+	LIST->gam = 0;
 	LIST->x_curr = 0;
 	LIST->y_curr = 0;
 	LIST->z_curr = 0;

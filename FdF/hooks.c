@@ -6,11 +6,33 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/23 14:30:09 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/23 14:32:05 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/23 16:08:25 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+void	parallel(t_list *list)
+{
+	while (list->next)
+	{
+		LIST->alf = 0;
+		LIST->bet = 0;
+		LIST->gam = 0;
+		list = list->next;
+	}
+}
+
+void	iso(t_list *list)
+{
+	while (list->next)
+	{
+		LIST->alf = 0.07;
+		LIST->bet = -0.05;
+		LIST->gam = 0.73;
+		list = list->next;
+	}
+}
 
 void	which_func(int key, t_list *list)
 {
@@ -46,6 +68,10 @@ int		deal_key(int key, t_list *list)
 
 	if (key == 53)
 		exit(0);
+	if (key == 34)
+		iso(list);
+	if (key == 35)
+		parallel(list);
 	mlx_clear_window(LIST->mlx, LIST->win);
 	sub = list;
 	which_func(key, sub);

@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/15 14:51:10 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/23 14:32:26 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/23 15:18:46 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int		main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		write(1, "usage: ./fdf file_name\n", 26);
+		write(1, "usage: ./fdf file_name\n", 22);
 		exit(0);
 	}
 	mlx_ptr = mlx_init();

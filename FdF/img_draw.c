@@ -6,7 +6,7 @@
 /*   By: bfalmer- <bfalmer-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/01/17 21:29:47 by bfalmer-          #+#    #+#             */
-/*   Updated: 2019/01/23 14:55:06 by bfalmer-         ###   ########.fr       */
+/*   Updated: 2019/01/23 15:42:22 by bfalmer-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,11 @@ void	fill_horiz_coord_array(t_list *list, int *arr)
 void	draw_vert (t_list *sub_list, t_list *sec_sub, int *arr)
 {
 	while (SEC_SUB->y_count == SUB_LIST->y_count)
+	{
+		if (sec_sub->next == 0)
+			break;
 		sec_sub = sec_sub->next;
+	}
 	while (sec_sub->next)
 	{
 		fill_vert_coord_array(sub_list, sec_sub, arr);
